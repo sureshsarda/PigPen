@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="%editor.name"
+            extensions="pig"
+            icon="icons/pig.png"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.apache.pig.pigpen.editor.PigEditor"
+            id="org.apache.pig.pigpen.editors.PigEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.apache.pig.pigpen.popupMenu"
+            nameFilter="*.pig"
+            objectClass="org.eclipse.core.resources.IResource">
+         <action
+               class="org.apache.pig.pigpen.actions.LaunchAction"
+               enablesFor="1"
+               icon="icons/pigLaunch.png"
+               id="org.apache.pig.pigpen.launch"
+               label="%action.label"
+               menubarPath="additions"
+               tooltip="%action.tooltip"/>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.apache.pig.eclipse.actionSet"
+            label="%actionSet.label"
+            visible="true">
+         <action
+               class="org.apache.pig.pigpen.actions.LaunchAction"
+               icon="icons/pigLaunch.png"
+               id="org.apache.pig.pigpen.actions.LaunchAction"
+               label="%action.label.1"
+               toolbarPath="pigGroup"
+               tooltip="%action.tooltip.1">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.apache.pig.pigpen.preferences.PigPreferencePage"
+            id="org.apache.pig.pigpen.preferences.PigPreferencePage"
+            name="%page.name">
+      </page>
+   </extension>
+    <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="org.apache.pig.pigpen.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+       id="pigscript.error"
+       point="org.eclipse.core.resources.markers"
+       name="%extension.name.0">
+       <super type="org.eclipse.core.resources.problemmarker"/>
+       <super type="org.eclipse.core.resources.textmarker"/>
+       <persistent value="true"/>
+   </extension>
+   <extension
+         name="PigPen Actions"
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="org.apache.pig.pigpen.viewActions"
+            targetID="org.eclipse.ui.console.ConsoleView">
+         <action
+               class="org.apache.pig.pigpen.actions.KillJobAction"
+               icon="icons/pigKill.png"
+               id="org.apache.pig.pigpen.actions.killPigJob"
+               label="Kill pig job"
+               style="push"
+               toolbarPath="additions"
+               tooltip="Kill the pig job"/>
+      </viewContribution>
+   </extension>
+</plugin>
